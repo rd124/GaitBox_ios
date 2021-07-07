@@ -1,15 +1,20 @@
 import React from "react";
 import { Text, StyleSheet, View, Button, TouchableOpacity, Touchable } from "react-native";
 
+//console.log("ROOOOOOOOOOOOOOOOOo");
 
 
 const HomeScreen = ({navigation}) => {
+  //console.log("HDEGBKCOPEVVVVVVVV");
 
   return (
+    //console.log("BBBBBBBBBBBBBBBBBB"),
+
     <View style = {styles.main}>
       <Text style={styles.headtext}>GaitBox Test</Text>
       <Button
       title = "Test Distance"
+      onPress={() => navigation.navigate('TestD')}
     />
       <Button
       title = "View Results"

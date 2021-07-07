@@ -1,0 +1,20 @@
+{
+  "IMU_LSM6DS3" : {
+    "1-setFloat" : {
+      "close_d" : 560,
+      "close_t" : 72495,
+      "far_d" : 1970,
+      "far_t" : 53040,
+      "v" : 0.072475
+    },
+    "2-pushJSON" : {
+      "-MduHVmkiLJlixdetPdp" : {
+        "close_d" : 560.0,
+        "close_t" : 72495.0,
+        "far_d" : 1970.0,
+        "far_t" : 53040.0,
+        "v" : 0.07247
+      }
+    }
+  }
+}
