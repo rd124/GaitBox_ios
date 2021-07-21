@@ -7,12 +7,11 @@ import TestDistance from './src/screens/TestDistance';
 
 
 
-
 const navigator = createStackNavigator(
   {
   Home: HomeScreen,
   Results: ResultsScreen,
-  TestD: TestDistance
+  TestD: TestDistance,
   }, 
   {
     initialRouteName: 'Home',

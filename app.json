@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "food",
-    "slug": "food",
+    "name": "GB",
+    "slug": "GB",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/walk.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/GaitBox.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,13 +17,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.riddhi.GaitBox",
+      "buildNumber": "1.0.0"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+      "package": "com.riddhi.GaitBox",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

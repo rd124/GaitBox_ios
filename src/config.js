@@ -1,3 +1,8 @@
+//This contains the configuration for the back-end
+//Firebase Realtime Database was used
+//Can be modified for a new database 
+//Credentials copied from Realtime Database
+
 import firebase from "firebase";
 
 const firebaseConfig = {
