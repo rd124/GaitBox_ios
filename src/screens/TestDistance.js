@@ -1,102 +1,98 @@
 //Walking Monitor App TestDistance Screen Code
-//Last edited on 7-20-21 by Riddhi Ranjithkumar
+//Last edited on 7-22-21 by Riddhi Ranjithkumar
 //This code renders the Test Distance screen, which is where the user inputs the parameters for the test
 //There are options for Start and Stop, as well as a button to submit these distances 
 
 import React, {useState} from 'react';
-import {Text, StyleSheet, View,TextInput, Alert,Button, NetInfo} from 'react-native';
+import {ScrollView, Text, StyleSheet, View,TextInput, Alert,Button, NetInfo} from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import {db} from '../config';
 
 const TestDistance = () => { 
 
     const[subm,setSubm] = useState(0);   // state of submit button
-    const [fardistance, setFardistance] = useState(0); //state of start distance button
-    const [closedistance, setClosedistance] = useState(0); //state of stop distance button
+    const [fardistance, setFardistance] = useState("0"); //state of start distance button
+    const [closedistance, setClosedistance] = useState("0"); //state of stop distance button
+
+    //reset
+    const[resettest,setResettest] = useState("no");
+    if(resettest!="no"){
+    db.ref('/GB/Reset/').set({resettest});
+  }
 
     //sending test parameters to backend
     if(subm==1){
-    if(setFardistance!=0 ){
+    if(fardistance!=0 ){
         db.ref('/GB/Far/').set({fardistance});
         }
-    if(setClosedistance!=0){
+    if(closedistance!=0){
         db.ref('/GB/Close/').set({closedistance});
             }
         }
 
     return (
-    <View style = {styles.main}>
-        <Text style = {styles.headtext}>Set parameters</Text>
-        <Text style = {styles.rtext}> Enter distance in meters.</Text>
-        <Text style = {styles.headtext}></Text>
-        <Text style = {styles.rtext}>Start</Text>
+    <ScrollView style = {styles.main}>
+        <Text style = {styles.headtext}>Change Parameters</Text>
+        <Text style = {styles.rtext}>Start (m)</Text>
         <TextInput
             style = {styles.input}
             autoCapitalize ="none"
             autoCorrect={false}
             //numeric value
-            keyboardType = "number-pad" returnKeyType={ 'done' }
-            placeholder="0"
-            placeholderTextColor = "white"
+            keyboardType = "numeric" returnKeyType={ 'done' }
+            placeholder= "Type a Distance"
+            placeholderTextColor = "gray"
             onChangeText={text => setFardistance(text.toString())}
-            onSubmitEditing = {() => {
-                Alert.alert(
-                    "Set Far Distance?",
-                    "This will change the parameters of the test",
-                    [
-                        {text: "Cancel", onPress: () => Alert.alert("Cancel Pressed")},
-                        {text: "Okay", onPress: () => Alert.alert("Far Distance changed"),style: "cancel"} 
-                    ],
-                    {
-                      cancelable: true,
-                    }
-                  );
-                
-             }}
             />
-            <Text style = {styles.rtext}>Stop</Text>
+
+            <Text style = {styles.rtext}>Stop (m)</Text>
+
             <TextInput
             style = {styles.input}
             autoCapitalize ="none"
             autoCorrect={false}
-           // numeric value
-            keyboardType = "number-pad" returnKeyType={ 'done' }
-            placeholder= "0"
-            placeholderTextColor = "white"
+            keyboardType = "numeric" returnKeyType={ 'done' }
+            placeholder= "Type a Distance"
+            placeholderTextColor = "gray"
             onChangeText={text => setClosedistance(text.toString())}
-            onSubmitEditing = {() => {
-                Alert.alert(
-                    "Set Close Distance?",
-                    "This will change the parameters of the test",
-                    [
-                        {text: "Cancel", onPress: () => Alert.alert("Cancel Pressed")},
-                        {text: "Okay", onPress: () => Alert.alert("Close Distance changed"),style: "cancel"} 
-                    ],
-                    {
-                      cancelable: true,
-                    }
-                  );
-                
-             }}
             />
+
             <Text style = {styles.headtext}></Text>
 
-            <Button
+            <TouchableOpacity
             style = {styles.button}
-            title = "Set distances"
             onPress={() =>  Alert.alert(
                 "Change distance thresholds?",
                 "This will change the parameters of the test",
                 [
                   {
                     text: "Cancel",
-                    onPress: () => Alert.alert("Cancel Pressed"),
                     style: "cancel"
                   },
                   { text: "OK", onPress: () => {Alert.alert("Submitted"), setSubm(1)}}
                 ]
-            )}
-            ></Button>
-    </View>
+            )}>
+            <Text>Change distances</Text>
+            </TouchableOpacity>
+
+           <Text style = {styles.rtext}></Text>
+
+            <TouchableOpacity
+            style = {styles.button}
+            onPress={() => Alert.alert(
+                "This will start a new test",
+                "Wait for the LED to begin walking",
+            [
+            {
+            text: "Cancel",
+            style: "cancel"
+            },
+            {text: "OK", onPress: () => {Alert.alert("Wait for the LED to begin walking"), setResettest("reset")}}
+            ])
+            }>
+            <Text>Press to Start New Test</Text>
+            </TouchableOpacity>
+            </ScrollView>
 
     );
 
@@ -109,41 +105,47 @@ const styles = StyleSheet.create({
     },
     input: {
         textAlign: "center",
-        margin: 15,
-        borderRadius: 20,
-        borderWidth: 1,
+        marginBottom: 15,
+        marginTop: 15,
+        marginLeft: "15%",
+        marginRight: "15%",
+        borderRadius: 30,
+        //borderWidth: 1,
         padding: 10,
         backgroundColor: "white",
 
     },
     main:{
-        flex:1,
-        backgroundColor: "#FF8B3D"
+        backgroundColor: "#FF8B3D",
+        flex: 1,
+        //flexShrink: 1
     },
     headtext: {
-      fontSize: 30,
+      fontSize: 25,
       top:5,
       marginVertical: 20,
       marginHorizontal: 20,
       textAlign: "center",
       bottom: 10,
-      color: "black"
+      color: "white"
     },
     rtext: {
         fontSize: 20,
-        color: 'black',
+        color: 'white',
         marginLeft: '5%',
 
     },
     button:{
       alignItems: "center",
       padding: 10,
-      backgroundColor: "white",
+      backgroundColor: "#DCDCDC",
       overflow: 'hidden',
       borderRadius: 20,
+      //borderWidth: 1,
       marginLeft: '20%',
       marginRight: '20%',
-      fontSize: 30
+      fontSize: 30,
+      bottom: 10,
 
     },
 }); 
