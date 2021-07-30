@@ -1,7 +1,7 @@
 //Walking Monitor App TestDistance Screen Code
 //Last edited on 7-22-21 by Riddhi Ranjithkumar
 //This code renders the Test Distance screen, which is where the user inputs the parameters for the test
-//There are options for Start and Stop, as well as a button to submit these distances 
+//There are options for Start and Stop, as well as a button to submit these distances and reset the test
 
 import React, {useState} from 'react';
 import {ScrollView, Text, StyleSheet, View,TextInput, Alert,Button, NetInfo} from 'react-native';
@@ -77,7 +77,7 @@ const TestDistance = () => {
 
            <Text style = {styles.rtext}></Text>
 
-            <TouchableOpacity
+           <TouchableOpacity
             style = {styles.button}
             onPress={() => Alert.alert(
                 "This will start a new test",
@@ -87,7 +87,9 @@ const TestDistance = () => {
             text: "Cancel",
             style: "cancel"
             },
-            {text: "OK", onPress: () => {Alert.alert("Wait for the LED to begin walking"), setResettest("reset")}}
+            {text: "OK", onPress: () => {Alert.alert("Wait for LED to begin walking",
+             "After test refresh home screen to view results."),
+              setResettest("reset")}}
             ])
             }>
             <Text>Press to Start New Test</Text>
