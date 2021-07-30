@@ -34,7 +34,6 @@ const HomeScreen = ({navigation}) => {
             let vel = snapshot.val();
             
             velocity = Object.values( vel );
-            let speed = velocity[3].toFixed(2);
        })
       db.ref('/GB/Close/closedistance/').on('value', (snapshot) => {
             currentstop = snapshot.val();
@@ -69,8 +68,8 @@ const HomeScreen = ({navigation}) => {
         
          <Text style = {styles.resulttext}>Start Distance - {velocity[1]} m</Text>
          <Text style = {styles.resulttext}>Stop Distance - {velocity[0]} m</Text>
-         <Text style = {styles.resulttext}>Time Elapsed - {velocity[2]} s</Text>
-         <Text style = {styles.resulttext}>Velocity - {velocity[3]} m/s</Text>
+         <Text style = {styles.resulttext}>Time Elapsed - {parseFloat(velocity[2]).toFixed(2)} s</Text>
+         <Text style = {styles.resulttext}>Velocity - {parseFloat(velocity[3]).toFixed(2)} m/s</Text>
          
          <Text style = {styles.headtext}></Text>
 
